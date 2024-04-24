@@ -6142,7 +6142,10 @@ func main() {
 		return
 	}
 	// CORS middleware
-	r.Use(cors.Default())
+	config := cors.DefaultConfig()
+    config.AllowOrigins = []string{"*"} // Allow all origins
+    config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
+    r.Use(cors.New(config))
 
 	// Routes
 	r.POST("/sendCarEmail", sendCarEmailHandler)
